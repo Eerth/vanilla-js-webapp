@@ -13,18 +13,28 @@
 
     body {
       font-family: helvetica, arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      max-width: 800px;
-      margin: auto;
-      padding: 10px;
+    }
+
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      user-select: none;
     }
   </style>
 </head>
 
 <body>
-  <h1>Eert Hoogerwerf</h1>
+  <div class="container" onmousemove=onMouseMove(event)>
+    <h1>Welcome</h1>
+  </div>
 </body>
 
+<script>
+  const container = document.querySelector(".container")
+  function onMouseMove(e) {
+    container.style.transform = `translate(-${e.offsetX}px, -${e.offsetY}px)`
+  }
+</script>
 </html>
