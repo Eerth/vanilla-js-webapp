@@ -1,0 +1,47 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: helvetica, arial, sans-serif;
+}
+
+.container {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
+  transition: transform 0.05s;
+}
+
+.car {
+  position: absolute;
+  width: 10vw;
+  height: 5vw;
+  top: 10px;
+  left: 10px;
+  overflow: visible;
+}
+
+.chassis {
+  width: 100%;
+  height: 100%;
+  rx: 15%;
+  ry: 30%;
+  fill: white;
+  stroke: black;
+  stroke-width: 5;
+  opacity: 1
+}
+
+.wheel {
+  width: 25%;
+  height: 20%;
+  rx: 5%;
+  ry: 5%;
+  fill: white;
+  stroke: black;
+  stroke-width: 5;
+  transform-box: fill-box;
+  transform-origin: center;
+}

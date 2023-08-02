@@ -1,42 +1,27 @@
 <!DOCTYPE html>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <html>
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Eert Hoogerwerf</title>
-
-  <style>
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-    }
-
-    body {
-      font-family: helvetica, arial, sans-serif;
-    }
-
-    .container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      user-select: none;
-      transition: transform 0.05s;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="static/main.css" />
 </head>
 
-<body>
-  <div class="container" onmousemove=onMouseMove(event)>
+<body onmouseenter=onMouseEnter(event) onmouseleave=onMouseLeave(event) onmousemove=onMouseMove(event)>
+  <div class="container">
     <h1>Welcome</h1>
   </div>
+
+  <svg class="car" >
+    <rect class="wheel" x="10%" y="-10%" />
+    <rect id="front-left-wheel" class="wheel" x="65%" y="-10%" />
+    <rect class="wheel" x="10%" y="90%" />
+    <rect id="front-right-wheel" class="wheel" x="65%" y="90%" />
+    <rect class="chassis" />
+  </svg>
+
+  <script src="static/main.js"></script>
 </body>
 
-<script>
-  const container = document.querySelector(".container")
-  function onMouseMove(e) {
-    container.style.transform = `translate(-${e.offsetX}px, -${e.offsetY}px)`
-  }
-</script>
 </html>
