@@ -16,11 +16,11 @@ body {
 
 .car {
   position: absolute;
-  width: 10vw;
-  height: 5vw;
-  top: 10px;
-  left: 10px;
+  width: 10vmin;
+  height: 5vmin;
+  transform-origin: center left;
   overflow: visible;
+  visibility: hidden;
 }
 
 .chassis {
@@ -30,7 +30,7 @@ body {
   ry: 30%;
   fill: white;
   stroke: black;
-  stroke-width: 5;
+  stroke-width: 10%;
   opacity: 1
 }
 
@@ -41,7 +41,11 @@ body {
   ry: 5%;
   fill: white;
   stroke: black;
-  stroke-width: 5;
+  stroke-width: 10%;
   transform-box: fill-box;
   transform-origin: center;
+}
+
+.ball {
+  visibility: hidden;
 }
