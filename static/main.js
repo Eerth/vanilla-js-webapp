@@ -4,10 +4,23 @@ const carImage = document.querySelector(".car")
 const ballImage = document.querySelector(".ball")
 const frontLeftWheel = document.querySelector("#front-left-wheel")
 const frontRightWheel = document.querySelector("#front-right-wheel")
-const physicsWorker = new Worker('static/physics.js')
+const physicsWorker = new Worker('static/physics.js', { type: 'module' })
 
-function onMouseMove(e) {
+body.onMouseMove = function(e) {
   physicsWorker.postMessage({ command: 'mouse', x: e.clientX, y: e.clientY })
+}
+
+body.onMouseEnter = function(e) {
+  const screenWidth = body.clientWidth
+  const screenHeight = body.clientHeight
+  const carWidth = carImage.clientWidth
+  const ballWidth = ballImage.clientWidth
+
+  physicsWorker.postMessage({ command: 'start', carWidth, ballWidth, screenWidth, screenHeight })
+}
+
+body.onMouseLeave = function(e) {
+  physicsWorker.postMessage({ command: 'stop' })
 }
 
 physicsWorker.addEventListener('message', function (event) {
@@ -19,31 +32,13 @@ physicsWorker.addEventListener('message', function (event) {
   frontLeftWheel.style.rotate = `${car.wheelAngle}rad`
   frontRightWheel.style.rotate = `${car.wheelAngle}rad`
 
-  ballImage.style.left = `${ball.x}px`
-  ballImage.style.top = `${ball.y}px`
+  ballImage.style.left = `${ball.x - ballImage.clientWidth / 2}px`
+  ballImage.style.top = `${ball.y - ballImage.clientHeight / 2}px`
 
   carImage.style.left = `${car.x}px`
-  carImage.style.top = `${car.y - carImage.clientHeight/2}px`
+  carImage.style.top = `${car.y - carImage.clientHeight / 2}px`
   carImage.style.rotate = `${car.r}rad`
 
   ballImage.style.visibility = 'visible'
   carImage.style.visibility = 'visible'
 })
-
-function onMouseEnter(e) {
-  // Start car in the center of the screen
-  // Car's reference frame is on the rear axle
-  physicsWorker.postMessage({
-    command: 'start',
-    carX: body.clientWidth / 2 - carImage.clientWidth / 2,
-    carY: body.clientHeight / 2,
-    carL: carImage.clientWidth,
-    ballX: 3 * body.clientWidth / 4,
-    ballY: body.clientHeight / 2,
-    ballR: ballImage.clientWidth / 2,
-  })
-}
-
-function onMouseLeave(e) {
-  physicsWorker.postMessage({ command: 'stop' })
-}
