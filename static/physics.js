@@ -21,24 +21,11 @@ function startPhysicsLoop({ carWidth, ballWidth, screenWidth, screenHeight }) {
   let t0
   let dt = 0
   
-  const ball = new Ball(
-    3 * screenWidth / 4,
-    screenHeight / 2,
-    0,
-    0,
-    ballWidth / 2
-  )
+  const ball = new Ball(3 * screenWidth / 4, screenHeight / 2, 0, 0, ballWidth / 2)
 
   // Start car in the center of the screen
   // Car's reference frame is on the rear axle
-  const car = new Car(
-    screenWidth / 2 - carWidth / 2,
-    screenHeight / 2,
-    0,
-    0,
-    0,
-    carWidth
-  )
+  const car = new Car(screenWidth / 2 - carWidth / 2, screenHeight / 2, 0, 0, 0, carWidth)
 
   function physicsLoop(t) {
     if (t0)

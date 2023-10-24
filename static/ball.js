@@ -1,17 +1,17 @@
 export default class Ball {
-  constructor(x, y, dx, dy, R) {
+  constructor(x, y, dx, dy, Radius) {
     this.x = x
     this.y = y
     this.dx = dx
     this.dy = dy
-    this.R = R
+    this.Radius = Radius
   }
 
   calculateWallCollision(screenWidth, screenHeight) {
-    if (this.x - this.R <= 0 || this.x + this.R >= screenWidth)
+    if (this.x - this.Radius <= 0 || this.x + this.Radius >= screenWidth)
       this.dx = -this.dx
 
-    if (this.y - this.R <= 0 || this.y + this.R >= screenHeight)
+    if (this.y - this.Radius <= 0 || this.y + this.Radius >= screenHeight)
       this.dy = -this.dy
   }
 
@@ -25,7 +25,7 @@ export default class Ball {
     const closestY = Math.max(Math.min(ballY, car.L / 2), -car.L / 2)
 
     // Detect collision with the car
-    if (Math.sqrt((ballX - closestX) ** 2 + (ballY - closestY) ** 2) < this.R) {
+    if (Math.sqrt((ballX - closestX) ** 2 + (ballY - closestY) ** 2) < this.Radius) {
       // // Calculate the normal vector of the collision
       // const collisionVectorLength = Math.sqrt((ballX - closestX) ** 2 + (ballY - closestY) ** 2)
       // const normalX = (ballX - closestX) / collisionVectorLength
@@ -45,8 +45,8 @@ export default class Ball {
       // this.dy = ballDXAfter * Math.sin(car.r) + ballDYAfter * Math.cos(car.r)
 
       // Move the ball outside of the car
-      this.x = car.x + (closestX + this.R) * Math.cos(car.r) - closestY * Math.sin(car.r)
-      this.y = car.y + (closestX + this.R) * Math.sin(car.r) + closestY * Math.cos(car.r)
+      this.x = car.x + (closestX + this.Radius) * Math.cos(car.r) - closestY * Math.sin(car.r)
+      this.y = car.y + (closestX + this.Radius) * Math.sin(car.r) + closestY * Math.cos(car.r)
     }
   }
 

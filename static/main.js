@@ -6,11 +6,7 @@ const frontLeftWheel = document.querySelector("#front-left-wheel")
 const frontRightWheel = document.querySelector("#front-right-wheel")
 const physicsWorker = new Worker('static/physics.js', { type: 'module' })
 
-body.onMouseMove = function(e) {
-  physicsWorker.postMessage({ command: 'mouse', x: e.clientX, y: e.clientY })
-}
-
-body.onMouseEnter = function(e) {
+body.onmouseenter = function(e) {
   const screenWidth = body.clientWidth
   const screenHeight = body.clientHeight
   const carWidth = carImage.clientWidth
@@ -19,7 +15,11 @@ body.onMouseEnter = function(e) {
   physicsWorker.postMessage({ command: 'start', carWidth, ballWidth, screenWidth, screenHeight })
 }
 
-body.onMouseLeave = function(e) {
+body.onmousemove = function (e) {
+  physicsWorker.postMessage({ command: 'mouse', x: e.clientX, y: e.clientY })
+}
+
+body.onmouseleave = function(e) {
   physicsWorker.postMessage({ command: 'stop' })
 }
 

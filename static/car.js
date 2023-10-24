@@ -9,10 +9,10 @@ export default class Car {
   }
 
   /**
- * Calculate the angle of the front wheels with respect to the car's body based on the mouse position
- * @param {Object} mouse - Mouse position
- * @returns {Number} - Angle in radians
- */
+   * Calculate the angle of the front wheels with respect to the car's body based on the mouse position
+   * @param {Object} mouse - Mouse position
+   * @returns {Number} - Angle in radians
+   */
   getWheelAngle(mouse) {
     let angle = Math.atan2(mouse.y - this.y, mouse.x - this.x) - this.r
 
