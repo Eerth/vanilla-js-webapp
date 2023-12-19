@@ -4,7 +4,7 @@ import Car from './car.js'
 let stopRequested = false
 let mouse
 
-self.addEventListener('message', function (event) {
+onmessage = function (event) {
   // Handle incoming messages from the main thread
   // For example, start the physics loop when receiving a 'start' message
   if (event.data.command === 'start') {
@@ -15,7 +15,7 @@ self.addEventListener('message', function (event) {
     stopRequested = true
   else if (event.data.command === 'mouse')
     mouse = event.data
-})
+}
 
 function startPhysicsLoop({ carWidth, ballWidth, screenWidth, screenHeight }) {
   let t0
