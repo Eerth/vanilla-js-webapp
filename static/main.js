@@ -6,7 +6,7 @@ const frontLeftWheel = document.querySelector("#front-left-wheel")
 const frontRightWheel = document.querySelector("#front-right-wheel")
 const physicsWorker = new Worker('static/physics.js', { type: 'module' })
 
-body.onmouseenter = function(e) {
+function handleStart(e) {
   const screenWidth = body.clientWidth
   const screenHeight = body.clientHeight
   const carWidth = carImage.clientWidth
@@ -15,13 +15,25 @@ body.onmouseenter = function(e) {
   physicsWorker.postMessage({ command: 'start', carWidth, ballWidth, screenWidth, screenHeight })
 }
 
-body.onmousemove = function (e) {
-  physicsWorker.postMessage({ command: 'mouse', x: e.clientX, y: e.clientY })
+function handleMove(e) {
+  const x = e.touches ? e.touches[0].clientX : e.clientX
+  const y = e.touches ? e.touches[0].clientY : e.clientY
+
+  physicsWorker.postMessage({ command: 'mouse', x, y })
 }
 
-body.onmouseleave = function(e) {
+function handleStop(e) {
   physicsWorker.postMessage({ command: 'stop' })
 }
+
+body.onmouseenter = handleStart
+body.ontouchstart = handleStart
+
+body.onmousemove = handleMove
+body.ontouchmove = handleMove
+
+body.onmouseleave = handleStop
+body.ontouchend = handleStop
 
 physicsWorker.addEventListener('message', function (event) {
   // Handle updates received from the Web Worker
@@ -39,6 +51,6 @@ physicsWorker.addEventListener('message', function (event) {
   carImage.style.top = `${car.y - carImage.clientHeight / 2}px`
   carImage.style.rotate = `${car.r}rad`
 
-  ballImage.style.visibility = 'visible'
+  // ballImage.style.visibility = 'visible'
   carImage.style.visibility = 'visible'
 })
